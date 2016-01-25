@@ -1,0 +1,50 @@
+<ion-view view-title="Flux">
+<ion-side-menus>
+  <ion-side-menu-content>
+  <ion-header-bar class="bar-dark">
+    <h1 class="title">Liste de flux</h1>
+    <button class="button button-icon" ng-click="newList()">
+      <i class="icon ion-compose"></i>
+    </button>
+  </ion-header-bar>
+
+     <ion-content>
+      <ion-list can-swipe="true">
+	<ion-item ng-repeat="list in lists" class="item-icon-right" href="/#/tab/flux-detail/{{$index}}">
+	  <b>{{ list.title }}</b>
+	  <p>Auteur: {{ list.author}}</p>
+	  <p>Publié le: {{ list.published}}</p>
+	  <p><a href="{{list.link}}">Voir l'article</a></p>
+	  <ion-option-button class="button-assertive"
+                             ng-click="removeFromLists($index)">
+            Delete
+          </ion-option-button>
+	</ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-side-menu-content>
+
+  <script id="new-list.html" type="text/ng-template">
+    <div class="modal">
+      <ion-header-bar class="bar-secondary">
+	<h1 class="title">Nouveau flux</h1>
+	<button class="button button-clear button-positive" ng-click="closeNewList()">Cancel</button>
+      </ion-header-bar>
+      <ion-content>
+	<form ng-submit="createRss()">
+          <div class="list">
+	    <label class="item item-input">
+	      <input type="text" placeholder="Nom du flux" ng-model="formData.name">
+	      </label>
+	      <label class="item item-input">
+	      <input type="text" placeholder="url" ng-model="formData.url">
+	    </label>
+          </div>
+          <div class="padding">
+	    <button type="submit" class="button button-block button-positive">Créer</button>
+          </div>
+	</form>
+      </ion-content>
+    </div>
+  </script>
+</ion-side-menus>
